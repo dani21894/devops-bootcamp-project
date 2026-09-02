@@ -1,0 +1,40 @@
+# Application dependencies and build files
+app/node_modules/
+app/dist/
+
+# Environment files, private keys, and certificates
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+
+# AWS credentials
+.aws/
+credentials
+
+# Ansible credentials and secrets
+ansible/.ssh/
+ansible/ansible_key
+ansible/*.vault
+ansible/vault_pass*
+ansible/secrets.yml
+ansible/secrets.yaml
+
+# Terraform generated files and state
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/*.tfvars
+terraform/*.tfvars.json
+terraform/*.tfplan
+terraform/crash.log
+terraform/crash.*.log
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
