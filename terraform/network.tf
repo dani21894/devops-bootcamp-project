@@ -13,9 +13,9 @@ module "my_vpc" {
   public_subnet_names  = ["devops-public-subnet"]
   private_subnet_names = ["devops-private-subnet"]
 
-  map_public_ip_on_launch  = true
-  enable_nat_gateway       = true
-  single_nat_gateway       = true
+  map_public_ip_on_launch = true
+  enable_nat_gateway      = true
+  single_nat_gateway      = true
 
   # Route table names
   public_route_table_tags  = { Name = "devops-public-route" }
