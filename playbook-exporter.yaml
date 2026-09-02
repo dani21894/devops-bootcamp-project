@@ -1,0 +1,7 @@
+---
+- name: Install node_exporter on monitored servers
+  hosts: exporters
+  become: true
+
+  roles:
+    - prometheus.prometheus.node_exporter

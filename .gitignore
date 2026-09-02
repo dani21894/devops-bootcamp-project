@@ -1,0 +1,22 @@
+# Secrets and credentials
+.env
+*.env
+*.pem
+*.key
+*.crt
+*.pfx
+*.p12
+vault_pass.txt
+secrets.yml
+secrets.yaml
+
+# Ansible temporary/cache files
+.ansible/
+*.retry
+
+# Python/editor/operating system files
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+.DS_Store
