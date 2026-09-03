@@ -6,9 +6,9 @@ on:
       - main
     paths:
       - "README.md"
-      - "index.html"
       - "scripts/sync-docs.mjs"
       - "package.json"
+      - "package-lock.json"
   workflow_dispatch:
 
 permissions:
@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   sync:
-    name: Sync README.md and index.html
+    name: Generate index.html from README.md
     runs-on: ubuntu-latest
     if: github.actor != 'github-actions[bot]'
 
@@ -34,18 +34,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Run docs sync
+      - name: Generate documentation site
         run: npm run sync:docs -- --write
 
-      - name: Commit synced docs
+      - name: Commit generated index.html
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "docs: sync README.md and index.html [skip ci]"
+          commit_message: "docs: regenerate index.html from README [skip ci]"
           commit_user_name: github-actions[bot]
           commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
           commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          file_pattern: "README.md index.html"
+          file_pattern: "index.html"

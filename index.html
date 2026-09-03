@@ -1,517 +1,818 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DevOps Bootcamp Project documentation">
   <title>DevOps Bootcamp Project</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #131a22;
+      --panel-soft: #1c2530;
+      --border: #2b3745;
+      --text: #dbe5ef;
+      --muted: #93a4b7;
+      --heading: #ffffff;
+      --accent: #4dabf7;
+      --accent-soft: rgba(77, 171, 247, 0.12);
+      --code: #f3c677;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      background: #0b0f14;
-      color: #e6e6e6;
-      font-family: system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, #172333 0, var(--bg) 38rem),
+        var(--bg);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
     }
 
     .hero {
-      padding: 3rem 1.5rem;
+      padding: 5rem 1.5rem 3.5rem;
       text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--heading);
+      font-size: clamp(2.1rem, 6vw, 3.4rem);
+      line-height: 1.15;
+    }
+
+    .hero p {
+      max-width: 44rem;
+      margin: 1rem auto 0;
+      color: var(--muted);
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .badge {
+      padding: 0.35rem 0.75rem;
+      color: var(--text);
+      background: var(--accent-soft);
+      border: 1px solid rgba(77, 171, 247, 0.34);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .badge:hover {
+      background: rgba(77, 171, 247, 0.22);
+      transform: translateY(-2px);
     }
 
     main {
-      display: grid;
-      gap: 1.25rem;
-      max-width: 960px;
+      width: min(100% - 2rem, 960px);
       margin: 0 auto;
-      padding: 0 1.5rem 3rem;
+      padding: 2.5rem 0 4rem;
     }
 
-    .card {
-      padding: 1.25rem 1.5rem;
-      background: #131a22;
-      border: 1px solid #232c36;
-      border-radius: 12px;
+    #docs > h2 {
+      margin: 2rem 0 0;
+      padding: 1.25rem 1.5rem 0;
+      color: var(--heading);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-bottom: 0;
+      border-radius: 14px 14px 0 0;
+      font-size: 1.35rem;
     }
 
-    .card h3 {
+    #docs > h2::before {
+      content: "";
+      display: inline-block;
+      width: 0.55rem;
+      height: 0.55rem;
+      margin-right: 0.65rem;
+      background: var(--accent);
+      border-radius: 0.15rem;
+      vertical-align: 0.05rem;
+    }
+
+    #docs > h2 + * {
       margin-top: 0;
+      padding-top: 1rem;
+      border-radius: 0 0 14px 14px;
+    }
+
+    #docs > :not(h2) {
+      margin: 0;
+      padding: 0 1.5rem 1.25rem;
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+
+    #docs > :not(h2):last-child {
+      border-bottom: 1px solid var(--border);
+      border-radius: 0 0 14px 14px;
+    }
+
+    #docs h3,
+    #docs h4 {
+      color: var(--heading);
+    }
+
+    #docs h3 {
+      margin-top: 1.75rem;
+      font-size: 1.08rem;
+    }
+
+    #docs p,
+    #docs ul,
+    #docs ol,
+    #docs table,
+    #docs pre,
+    #docs blockquote {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    #docs ul,
+    #docs ol {
+      padding-left: 1.4rem;
+    }
+
+    #docs li + li {
+      margin-top: 0.38rem;
+    }
+
+    strong {
+      color: var(--heading);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
 
     code {
-      padding: 0.1rem 0.35rem;
-      background: #1c2530;
-      border-radius: 4px;
+      padding: 0.14rem 0.35rem;
+      color: var(--code);
+      background: var(--panel-soft);
+      border: 1px solid var(--border);
+      border-radius: 0.3rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
     }
 
     pre {
       overflow-x: auto;
       padding: 1rem;
-      background: #1c2530;
-      border-radius: 8px;
+      background: #0d131a;
+      border: 1px solid var(--border);
+      border-radius: 0.65rem;
     }
 
-    a {
-      color: #4dabf7;
+    pre code {
+      padding: 0;
+      color: var(--text);
+      background: transparent;
+      border: 0;
+    }
+
+    table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    th,
+    td {
+      padding: 0.7rem 0.8rem;
+      text-align: left;
+      vertical-align: top;
+      border: 1px solid var(--border);
+    }
+
+    th {
+      color: var(--heading);
+      background: var(--panel-soft);
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    blockquote {
+      padding: 0.25rem 1rem;
+      color: var(--muted);
+      border-left: 3px solid var(--accent);
+      background: var(--accent-soft);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 1rem auto;
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
     }
 
     footer {
-      padding: 2rem;
-      color: #7a8592;
+      padding: 2rem 1.5rem 3rem;
+      color: var(--muted);
       font-size: 0.9rem;
       text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding-top: 3.5rem;
+      }
+
+      #docs > h2 {
+        padding: 1rem 1rem 0;
+      }
+
+      #docs > :not(h2) {
+        padding-right: 1rem;
+        padding-left: 1rem;
+      }
+
+      th,
+      td {
+        min-width: 10rem;
+      }
     }
   </style>
 </head>
 <body>
   <header class="hero">
+    <span class="eyebrow">Project documentation</span>
     <h1>DevOps Bootcamp Project</h1>
-    <p>Generated documentation site synced from README.md</p>
+    <p>Infrastructure as Code with Terraform, Ansible, Docker, monitoring, and GitHub Actions.</p>
+
+    <div class="badges" aria-label="Project technologies">
+      <span class="badge">Terraform</span>
+      <span class="badge">Ansible</span>
+      <span class="badge">Docker</span>
+      <span class="badge">Prometheus</span>
+      <span class="badge">GitHub Actions</span>
+    </div>
   </header>
 
   <main>
-    <!-- SYNC:START -->
-    <article class="card">
-      <h3>URLs</h3>
-      <p>| Service | URL |</p>
-      <p>|---|---|</p>
-      <p>| Application | https://web.artisandevops.com |</p>
-      <p>| Documentation site | <a href="https://dani21894.github.io/devops-bootcamp-project/">GitHub Pages</a> |</p>
-      <p>| Source repository | <a href="https://github.com/dani21894/devops-bootcamp-project/">dani21894/devops-bootcamp-project</a> |</p>
-      <p>| Monitoring | https://monitoring.artisandevops.com |</p>
-    </article>
+    <section id="docs">
+      <!-- SYNC:START -->
+      <p>End-to-end DevOps bootcamp project that provisions AWS infrastructure with Terraform, configures services with Ansible, builds the ShipIt Launchpad web application into a Docker image, publishes that image to Amazon ECR, and deploys it to an EC2 web server. Repository documentation is automatically synchronized to a GitHub Pages site using GitHub Actions.</p>
+<h2>URLs</h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Application</td>
+<td><a href="https://web.artisandevops.com">https://web.artisandevops.com</a></td>
+</tr>
+<tr>
+<td>Documentation site</td>
+<td><a href="https://dani21894.github.io/devops-bootcamp-project/">GitHub Pages</a></td>
+</tr>
+<tr>
+<td>Source repository</td>
+<td><a href="https://github.com/dani21894/devops-bootcamp-project/">dani21894/devops-bootcamp-project</a></td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td><a href="https://monitoring.artisandevops.com">https://monitoring.artisandevops.com</a></td>
+</tr>
+</tbody></table>
+<h2>Repository Layout</h2>
+<p>The repository is organized as a monorepo. It contains the web application, automation, infrastructure-as-code, and documentation tooling in one place.</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>app/</code></td>
+<td>ShipIt Launchpad source code, <code>Dockerfile</code>, and <code>.dockerignore</code></td>
+</tr>
+<tr>
+<td><code>ansible/</code></td>
+<td>Inventory, Ansible configuration, and server deployment playbooks</td>
+</tr>
+<tr>
+<td><code>terraform/</code></td>
+<td>AWS infrastructure-as-code files</td>
+</tr>
+<tr>
+<td><code>scripts/sync-docs.mjs</code></td>
+<td>Synchronizes <code>README.md</code> and the root <code>index.html</code> documentation site</td>
+</tr>
+<tr>
+<td><code>package.json</code></td>
+<td>Root Node.js tooling for the documentation sync command</td>
+</tr>
+<tr>
+<td><code>.github/workflows/commit-pipeline.yml</code></td>
+<td>Synchronizes documentation after documentation changes are pushed</td>
+</tr>
+<tr>
+<td><code>.github/workflows/static.yml</code></td>
+<td>Deploys the root <code>index.html</code> to GitHub Pages</td>
+</tr>
+<tr>
+<td><code>index.html</code></td>
+<td>GitHub Pages entry point generated from this README</td>
+</tr>
+</tbody></table>
+<pre><code class="language-text">.
+├── .github/
+│   └── workflows/
+│       ├── commit-pipeline.yml
+│       └── static.yml
+├── ansible/
+├── app/
+│   ├── Dockerfile
+│   ├── .dockerignore
+│   ├── package.json
+│   ├── public/
+│   ├── scripts/
+│   └── src/
+├── scripts/
+│   └── sync-docs.mjs
+├── terraform/
+├── .gitignore
+├── index.html
+├── package.json
+└── README.md
+</code></pre>
+<h2>Architecture</h2>
+<p>The deployment pipeline moves the application through source control, containerization, a private container registry, configuration management, and public DNS.</p>
+<pre><code class="language-text">GitHub repository
+        |
+        v
+Ansible controller (10.0.0.135)
+  - builds Docker image
+  - pushes image to Amazon ECR
+        |
+        v
+Amazon ECR private repository
+  462525375635.dkr.ecr.ap-southeast-1.amazonaws.com/
+  devops-bootcamp/final-project-dani21894:v1
+        |
+        v
+Web EC2 server (10.0.0.5)
+  - Ansible pulls image from ECR
+  - Docker runs Nginx container on port 80
+        |
+        v
+Cloudflare DNS
+  web.artisandevops.com
+        |
+        v
+Public ShipIt Launchpad application
+</code></pre>
+<h3>Infrastructure nodes</h3>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th align="right">Private IP</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ansible controller</td>
+<td align="right"><code>10.0.0.135</code></td>
+<td>Builds and publishes the application image; runs Ansible playbooks</td>
+</tr>
+<tr>
+<td>Web server</td>
+<td align="right"><code>10.0.0.5</code></td>
+<td>Pulls the ECR image and serves the application container on port 80</td>
+</tr>
+<tr>
+<td>Monitoring server</td>
+<td align="right"><code>10.0.0.136</code></td>
+<td>Hosts monitoring services and participates in exporter monitoring</td>
+</tr>
+</tbody></table>
+<p>All infrastructure is deployed in AWS region <code>ap-southeast-1</code>.</p>
+<h2>Quickstart</h2>
+<p>Clone the repository:</p>
+<pre><code class="language-bash">git clone https://github.com/dani21894/devops-bootcamp-project.git
+cd devops-bootcamp-project
+</code></pre>
+<p>Provision or update AWS infrastructure using Terraform:</p>
+<pre><code class="language-bash">cd terraform
+terraform init
+terraform plan
+terraform apply
+</code></pre>
+<p>Run Ansible from the controller to deploy the web image:</p>
+<pre><code class="language-bash">cd ../ansible
+ansible-playbook -i inventory.ini --syntax-check playbook-web.yaml
+ansible-playbook -i inventory.ini --limit web playbook-web.yaml
+</code></pre>
+<p>Verify that the web server responds from inside the VPC:</p>
+<pre><code class="language-bash">curl -I http://10.0.0.5/
+</code></pre>
+<p>Expected result:</p>
+<pre><code class="language-text">HTTP/1.1 200 OK
+</code></pre>
+<h2>Terraform</h2>
+<p>Terraform defines the AWS infrastructure used by the project. The exact file names can differ, but the Terraform directory should contain the source configuration for networking, security groups, EC2 instances, IAM resources, outputs, and inventory generation where applicable.</p>
+<h3>Typical Terraform responsibilities</h3>
+<ul>
+<li>Create the VPC, subnets, route tables, internet/NAT connectivity, and security groups.</li>
+<li>Create EC2 instances for the controller, web server, and monitoring stack.</li>
+<li>Associate IAM roles so the controller can push to ECR and the web server can pull from ECR.</li>
+<li>Configure inbound rules required by the deployment.</li>
+<li>Output instance addresses or generate inventory inputs for Ansible.</li>
+</ul>
+<h3>Security requirements</h3>
+<p>The public web server needs inbound HTTP access:</p>
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th align="right">Port</th>
+<th>Source</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TCP</td>
+<td align="right"><code>80</code></td>
+<td><code>0.0.0.0/0</code></td>
+<td>Public HTTP access to the Nginx container</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td align="right"><code>22</code></td>
+<td>Restricted / VPC source</td>
+<td>Administrative SSH when required</td>
+</tr>
+</tbody></table>
+<p>Do not commit Terraform state, plans, <code>.terraform/</code>, private keys, or secret variable files. They are excluded through <code>.gitignore</code>.</p>
+<h2>Ansible</h2>
+<p>Ansible configures the servers after infrastructure is available.</p>
+<h3>Inventory groups</h3>
+<p>The deployment inventory uses these groups:</p>
+<pre><code class="language-ini">[web]
+10.0.0.5
 
-    <article class="card">
-      <h3>Repository Layout</h3>
-      <p>The repository is organized as a monorepo. It contains the web application, automation, infrastructure-as-code, and documentation tooling in one place.</p>
-      <p>| Path | Purpose |</p>
-      <p>|---|---|</p>
-      <p>| <code>app/</code> | ShipIt Launchpad source code, <code>Dockerfile</code>, and <code>.dockerignore</code> |</p>
-      <p>| <code>ansible/</code> | Inventory, Ansible configuration, and server deployment playbooks |</p>
-      <p>| <code>terraform/</code> | AWS infrastructure-as-code files |</p>
-      <p>| <code>scripts/sync-docs.mjs</code> | Synchronizes <code>README.md</code> and the root <code>index.html</code> documentation site |</p>
-      <p>| <code>package.json</code> | Root Node.js tooling for the documentation sync command |</p>
-      <p>| <code>.github/workflows/commit-pipeline.yml</code> | Synchronizes documentation after documentation changes are pushed |</p>
-      <p>| <code>.github/workflows/static.yml</code> | Deploys the root <code>index.html</code> to GitHub Pages |</p>
-      <p>| <code>index.html</code> | GitHub Pages entry point generated from this README |</p>
-      <pre><code>
-      .
-      ├── .github/
-      │   └── workflows/
-      │       ├── commit-pipeline.yml
-      │       └── static.yml
-      ├── ansible/
-      ├── app/
-      │   ├── Dockerfile
-      │   ├── .dockerignore
-      │   ├── package.json
-      │   ├── public/
-      │   ├── scripts/
-      │   └── src/
-      ├── scripts/
-      │   └── sync-docs.mjs
-      ├── terraform/
-      ├── .gitignore
-      ├── index.html
-      ├── package.json
-      └── README.md
-      </code></pre>
-    </article>
+[monitoring]
+10.0.0.136
 
-    <article class="card">
-      <h3>Architecture</h3>
-      <p>The deployment pipeline moves the application through source control, containerization, a private container registry, configuration management, and public DNS.</p>
-      <pre><code>
-      GitHub repository
-              |
-              v
-      Ansible controller (10.0.0.135)
-        - builds Docker image
-        - pushes image to Amazon ECR
-              |
-              v
-      Amazon ECR private repository
-        462525375635.dkr.ecr.ap-southeast-1.amazonaws.com/
-        devops-bootcamp/final-project-dani21894:v1
-              |
-              v
-      Web EC2 server (10.0.0.5)
-        - Ansible pulls image from ECR
-        - Docker runs Nginx container on port 80
-              |
-              v
-      Cloudflare DNS
-        web.artisandevops.com
-              |
-              v
-      Public ShipIt Launchpad application
-      </code></pre>
-      <h4>Infrastructure nodes</h4>
-      <p>| Node | Private IP | Role |</p>
-      <p>|---|---:|---|</p>
-      <p>| Ansible controller | <code>10.0.0.135</code> | Builds and publishes the application image; runs Ansible playbooks |</p>
-      <p>| Web server | <code>10.0.0.5</code> | Pulls the ECR image and serves the application container on port 80 |</p>
-      <p>| Monitoring server | <code>10.0.0.136</code> | Hosts monitoring services and participates in exporter monitoring |</p>
-      <p>All infrastructure is deployed in AWS region <code>ap-southeast-1</code>.</p>
-    </article>
+[exporters]
+10.0.0.5
+</code></pre>
+<p>A host can belong to more than one group. The web server belongs to both <code>web</code> and <code>exporters</code> because it runs the application and is also a monitoring target.</p>
+<h3>Web deployment</h3>
+<p><code>ansible/playbook-web.yaml</code> deploys the web application. Its main tasks are:</p>
+<ol>
+<li>Ensure Docker is running and enabled.</li>
+<li>Install AWS CLI requirements if needed.</li>
+<li>Authenticate Docker to private Amazon ECR.</li>
+<li>Stop the older Docker Compose Nginx stack if present.</li>
+<li>Remove the previous <code>web</code> container.</li>
+<li>Pull the selected ECR image.</li>
+<li>Run the new <code>web</code> container with <code>80:80</code> port publishing.</li>
+<li>Verify the container serves HTTP 200 locally on the web server.</li>
+</ol>
+<p>Run the deployment:</p>
+<pre><code class="language-bash">cd ansible
+ansible-playbook -i inventory.ini --limit web playbook-web.yaml
+</code></pre>
+<p>Check the running container:</p>
+<pre><code class="language-bash">ansible web \
+  -i inventory.ini \
+  -b \
+  -m ansible.builtin.command \
+  -a &quot;docker ps&quot;
+</code></pre>
+<p>Expected port mapping:</p>
+<pre><code class="language-text">0.0.0.0:80-&gt;80/tcp
+</code></pre>
+<h2>Application</h2>
+<p>The application is ShipIt Launchpad, a Vite-based web application using Three.js. The project source is stored under <code>app/</code>.</p>
+<h3>Application commands</h3>
+<p>Run these commands from the application directory:</p>
+<pre><code class="language-bash">cd app
+npm ci
+npm run dev
+npm test
+npm run build
+npm run preview
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>npm ci</code></td>
+<td>Install exact dependency versions from <code>package-lock.json</code></td>
+</tr>
+<tr>
+<td><code>npm run dev</code></td>
+<td>Start the Vite development server</td>
+</tr>
+<tr>
+<td><code>npm test</code></td>
+<td>Run the application preflight test</td>
+</tr>
+<tr>
+<td><code>npm run build</code></td>
+<td>Generate production files in <code>dist/</code></td>
+</tr>
+<tr>
+<td><code>npm run preview</code></td>
+<td>Serve the built application locally for validation</td>
+</tr>
+</tbody></table>
+<h3>Docker image</h3>
+<p>The application uses a multi-stage Docker build.</p>
+<ol>
+<li>The Node.js build stage installs dependencies using <code>npm ci</code>.</li>
+<li>Vite generates optimized static files with <code>npm run build</code>.</li>
+<li>The Nginx runtime stage copies only <code>dist/</code> and serves it on port 80.</li>
+</ol>
+<pre><code class="language-dockerfile">FROM node:20-alpine AS build
 
-    <article class="card">
-      <h3>Quickstart</h3>
-      <p>Clone the repository:</p>
-      <pre><code>
-      git clone https://github.com/dani21894/devops-bootcamp-project.git
-      cd devops-bootcamp-project
-      </code></pre>
-      <p>Provision or update AWS infrastructure using Terraform:</p>
-      <pre><code>
-      cd terraform
-      terraform init
-      terraform plan
-      terraform apply
-      </code></pre>
-      <p>Run Ansible from the controller to deploy the web image:</p>
-      <pre><code>
-      cd ../ansible
-      ansible-playbook -i inventory.ini --syntax-check playbook-web.yaml
-      ansible-playbook -i inventory.ini --limit web playbook-web.yaml
-      </code></pre>
-      <p>Verify that the web server responds from inside the VPC:</p>
-      <pre><code>
-      curl -I http://10.0.0.5/
-      </code></pre>
-      <p>Expected result:</p>
-      <pre><code>
-      HTTP/1.1 200 OK
-      </code></pre>
-    </article>
+WORKDIR /app
 
-    <article class="card">
-      <h3>Terraform</h3>
-      <p>Terraform defines the AWS infrastructure used by the project. The exact file names can differ, but the Terraform directory should contain the source configuration for networking, security groups, EC2 instances, IAM resources, outputs, and inventory generation where applicable.</p>
-      <h4>Typical Terraform responsibilities</h4>
-      <ul>
-      <li>Create the VPC, subnets, route tables, internet/NAT connectivity, and security groups.</li>
-      <li>Create EC2 instances for the controller, web server, and monitoring stack.</li>
-      <li>Associate IAM roles so the controller can push to ECR and the web server can pull from ECR.</li>
-      <li>Configure inbound rules required by the deployment.</li>
-      <li>Output instance addresses or generate inventory inputs for Ansible.</li>
-      </ul>
-      <h4>Security requirements</h4>
-      <p>The public web server needs inbound HTTP access:</p>
-      <p>| Protocol | Port | Source | Reason |</p>
-      <p>|---|---:|---|---|</p>
-      <p>| TCP | <code>80</code> | <code>0.0.0.0/0</code> | Public HTTP access to the Nginx container |</p>
-      <p>| TCP | <code>22</code> | Restricted / VPC source | Administrative SSH when required |</p>
-      <p>Do not commit Terraform state, plans, <code>.terraform/</code>, private keys, or secret variable files. They are excluded through <code>.gitignore</code>.</p>
-    </article>
+COPY package.json package-lock.json ./
+RUN npm ci
 
-    <article class="card">
-      <h3>Ansible</h3>
-      <p>Ansible configures the servers after infrastructure is available.</p>
-      <h4>Inventory groups</h4>
-      <p>The deployment inventory uses these groups:</p>
-      <pre><code>
-      [web]
-      10.0.0.5
-      
-      [monitoring]
-      10.0.0.136
-      
-      [exporters]
-      10.0.0.5
-      </code></pre>
-      <p>A host can belong to more than one group. The web server belongs to both <code>web</code> and <code>exporters</code> because it runs the application and is also a monitoring target.</p>
-      <h4>Web deployment</h4>
-      <p><code>ansible/playbook-web.yaml</code> deploys the web application. Its main tasks are:</p>
-      <p>1. Ensure Docker is running and enabled.</p>
-      <p>2. Install AWS CLI requirements if needed.</p>
-      <p>3. Authenticate Docker to private Amazon ECR.</p>
-      <p>4. Stop the older Docker Compose Nginx stack if present.</p>
-      <p>5. Remove the previous <code>web</code> container.</p>
-      <p>6. Pull the selected ECR image.</p>
-      <p>7. Run the new <code>web</code> container with <code>80:80</code> port publishing.</p>
-      <p>8. Verify the container serves HTTP 200 locally on the web server.</p>
-      <p>Run the deployment:</p>
-      <pre><code>
-      cd ansible
-      ansible-playbook -i inventory.ini --limit web playbook-web.yaml
-      </code></pre>
-      <p>Check the running container:</p>
-      <pre><code>
-      ansible web \
-        -i inventory.ini \
-        -b \
-        -m ansible.builtin.command \
-        -a "docker ps"
-      </code></pre>
-      <p>Expected port mapping:</p>
-      <pre><code>
-      0.0.0.0:80-&gt;80/tcp
-      </code></pre>
-    </article>
+COPY . .
+RUN npm run build
 
-    <article class="card">
-      <h3>Application</h3>
-      <p>The application is ShipIt Launchpad, a Vite-based web application using Three.js. The project source is stored under <code>app/</code>.</p>
-      <h4>Application commands</h4>
-      <p>Run these commands from the application directory:</p>
-      <pre><code>
-      cd app
-      npm ci
-      npm run dev
-      npm test
-      npm run build
-      npm run preview
-      </code></pre>
-      <p>| Command | Purpose |</p>
-      <p>|---|---|</p>
-      <p>| <code>npm ci</code> | Install exact dependency versions from <code>package-lock.json</code> |</p>
-      <p>| <code>npm run dev</code> | Start the Vite development server |</p>
-      <p>| <code>npm test</code> | Run the application preflight test |</p>
-      <p>| <code>npm run build</code> | Generate production files in <code>dist/</code> |</p>
-      <p>| <code>npm run preview</code> | Serve the built application locally for validation |</p>
-      <h4>Docker image</h4>
-      <p>The application uses a multi-stage Docker build.</p>
-      <p>1. The Node.js build stage installs dependencies using <code>npm ci</code>.</p>
-      <p>2. Vite generates optimized static files with <code>npm run build</code>.</p>
-      <p>3. The Nginx runtime stage copies only <code>dist/</code> and serves it on port 80.</p>
-      <pre><code>
-      FROM node:20-alpine AS build
-      
-      WORKDIR /app
-      
-      COPY package.json package-lock.json ./
-      RUN npm ci
-      
-      COPY . .
-      RUN npm run build
-      
-      FROM nginx:alpine
-      
-      COPY --from=build /app/dist /usr/share/nginx/html
-      
-      EXPOSE 80
-      
-      CMD ["nginx", "-g", "daemon off;"]
-      </code></pre>
-      <p>Build and validate the image on the Ansible controller:</p>
-      <pre><code>
-      cd ~/app/ship
-      sudo docker build -t shipit-launchpad:v1 .
-      
-      sudo docker run -d \
-        --name shipit-test \
-        -p 8080:80 \
-        shipit-launchpad:v1
-      
-      curl -I http://127.0.0.1:8080/
-      </code></pre>
-      <p>Stop the temporary test container after validation:</p>
-      <pre><code>
-      sudo docker rm -f shipit-test
-      </code></pre>
-    </article>
+FROM nginx:alpine
 
-    <article class="card">
-      <h3>Amazon ECR</h3>
-      <p>The container image is stored in private Amazon ECR.</p>
-      <pre><code>
-      Registry: 462525375635.dkr.ecr.ap-southeast-1.amazonaws.com
-      Repository: devops-bootcamp/final-project-dani21894
-      Tag: v1
-      Full image URI:
-      462525375635.dkr.ecr.ap-southeast-1.amazonaws.com/devops-bootcamp/final-project-dani21894:v1
-      </code></pre>
-      <p>Set image variables on the controller:</p>
-      <pre><code>
-      export AWS_REGION=ap-southeast-1
-      export ECR_REGISTRY=462525375635.dkr.ecr.ap-southeast-1.amazonaws.com
-      export IMAGE_REPO=devops-bootcamp/final-project-dani21894
-      export IMAGE_TAG=v1
-      export IMAGE_URI=${ECR_REGISTRY}/${IMAGE_REPO}:${IMAGE_TAG}
-      </code></pre>
-      <p>Authenticate Docker, tag the image, and push it:</p>
-      <pre><code>
-      aws ecr get-login-password --region "$AWS_REGION" \
-        | sudo docker login \
-            --username AWS \
-            --password-stdin "$ECR_REGISTRY"
-      
-      sudo docker tag shipit-launchpad:v1 "$IMAGE_URI"
-      sudo docker push "$IMAGE_URI"
-      </code></pre>
-      <p>Verify the pushed ECR image:</p>
-      <pre><code>
-      aws ecr describe-images \
-        --region "$AWS_REGION" \
-        --repository-name "$IMAGE_REPO" \
-        --query 'imageDetails[].{Tags:imageTags,PushedAt:imagePushedAt,Digest:imageDigest}' \
-        --output table
-      </code></pre>
-      <h4>IAM permissions</h4>
-      <p>The controller instance role needs ECR push permissions, including:</p>
-      <pre><code>
-      ecr:GetAuthorizationToken
-      ecr:BatchCheckLayerAvailability
-      ecr:InitiateLayerUpload
-      ecr:UploadLayerPart
-      ecr:CompleteLayerUpload
-      ecr:PutImage
-      </code></pre>
-      <p>The web EC2 instance role needs permission to pull from ECR, such as <code>AmazonEC2ContainerRegistryReadOnly</code>.</p>
-    </article>
+COPY --from=build /app/dist /usr/share/nginx/html
 
-    <article class="card">
-      <h3>Cloudflare DNS</h3>
-      <p>The web application runs on the EC2 web server but is exposed using Cloudflare DNS.</p>
-      <p>Create an A record in the <code>artisandevops.com</code> Cloudflare zone:</p>
-      <p>| Field | Value |</p>
-      <p>|---|---|</p>
-      <p>| Type | <code>A</code> |</p>
-      <p>| Name | <code>web</code> |</p>
-      <p>| Content | Public IPv4 address of the web EC2 instance |</p>
-      <p>| Proxy status | <code>Proxied</code> (orange cloud) |</p>
-      <p>| TTL | <code>Auto</code> |</p>
-      <p>Do not use the private IP <code>10.0.0.5</code> in Cloudflare. Cloudflare must point to the public IPv4 address of the web EC2 instance.</p>
-      <p>Verify the published application:</p>
-      <pre><code>
-      curl -I http://web.artisandevops.com
-      </code></pre>
-    </article>
+EXPOSE 80
 
-    <article class="card">
-      <h3>Monitoring</h3>
-      <p>The monitoring server is <code>10.0.0.136</code>. Node Exporter targets only the web server through the <code>exporters</code> Ansible group.</p>
-      <p>The monitoring access URL is https://monitoring.artisandevops.com/</p>
-    </article>
+CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+</code></pre>
+<p>Build and validate the image on the Ansible controller:</p>
+<pre><code class="language-bash">cd ~/app/ship
+sudo docker build -t shipit-launchpad:v1 .
 
-    <article class="card">
-      <h3>CI/CD</h3>
-      <p>Two GitHub Actions workflows live under <code>.github/workflows/</code>.</p>
-      <p>| Workflow | Purpose |</p>
-      <p>|---|---|</p>
-      <p>| <code>commit-pipeline.yml</code> | Synchronizes <code>README.md</code> and root <code>index.html</code> and auto-commits generated documentation changes |</p>
-      <p>| <code>static.yml</code> | Deploys the root static site to GitHub Pages |</p>
-      <h4>Documentation sync</h4>
-      <p>The documentation sync script keeps <code>README.md</code> and <code>index.html</code> aligned:</p>
-      <ul>
-      <li>When <code>README.md</code> changes, <code>index.html</code> is regenerated from it.</li>
-      <li>Every <code>##</code> heading in the README becomes a documentation card in the synced section of the web page.</li>
-      <li>When <code>index.html</code> changes inside the synced card area, <code>README.md</code> is regenerated from its cards.</li>
-      <li>If both documents change, <code>README.md</code> takes precedence.</li>
-      <li>The generated content is restricted to the range between <code>&lt;!-- SYNC:START --&gt;</code> and <code>&lt;!-- SYNC:END --&gt;</code>.</li>
-      <li>Styling, hero content, and footer content outside that range remain unchanged.</li>
-      </ul>
-      <p>Run the sync locally from the repository root:</p>
-      <pre><code>
-      npm install
-      npm run sync:docs
-      npm run sync:docs -- --write
-      </code></pre>
-      <p>The first command is a dry run. The final command writes the generated result to disk.</p>
-      <h4>GitHub Pages</h4>
-      <p>GitHub Pages is configured with:</p>
-      <pre><code>
-      Repository Settings -&gt; Pages -&gt; Build and deployment -&gt; Source: GitHub Actions
-      </code></pre>
-      <p>The Pages workflow uploads the repository root, including the generated <code>index.html</code>, and publishes it at:</p>
-      <pre><code>
-      https://dani21894.github.io/devops-bootcamp-project/
-      </code></pre>
-      <h4>CI/CD validation</h4>
-      <p>To test the complete documentation pipeline:</p>
-      <pre><code>
-      nano README.md
-      npm run sync:docs -- --write
-      
-      git add README.md index.html
-      git commit -m "docs: update deployment documentation"
-      git push origin main
-      </code></pre>
-      <p>After the push:</p>
-      <p>1. <code>Docs Sync</code> runs and synchronizes the documentation files.</p>
-      <p>2. If needed, <code>github-actions[bot]</code> creates a commit containing generated changes.</p>
-      <p>3. <code>Deploy static site to GitHub Pages</code> publishes the updated <code>index.html</code>.</p>
-      <p>4. The GitHub Pages documentation site reflects the latest README content.</p>
-    </article>
+sudo docker run -d \
+  --name shipit-test \
+  -p 8080:80 \
+  shipit-launchpad:v1
 
-    <article class="card">
-      <h3>Operational Commands</h3>
-      <h4>Check web deployment</h4>
-      <pre><code>
-      curl -I http://10.0.0.5/
-      curl -I http://web.artisandevops.com
-      </code></pre>
-      <h4>Check running web container</h4>
-      <pre><code>
-      ansible web \
-        -i ansible/inventory.ini \
-        -b \
-        -m ansible.builtin.command \
-        -a "docker ps"
-      </code></pre>
-      <h4>View web container logs</h4>
-      <pre><code>
-      ansible web \
-        -i ansible/inventory.ini \
-        -b \
-        -m ansible.builtin.command \
-        -a "docker logs web"
-      </code></pre>
-      <h4>Release a new application version</h4>
-      <p>Use a new image tag for each release rather than overwriting a previous deployment tag.</p>
-      <pre><code>
-      cd ~/app/ship
-      sudo docker build -t shipit-launchpad:v2 .
-      
-      export IMAGE_TAG=v2
-      export IMAGE_URI=${ECR_REGISTRY}/${IMAGE_REPO}:${IMAGE_TAG}
-      
-      sudo docker tag shipit-launchpad:v2 "$IMAGE_URI"
-      sudo docker push "$IMAGE_URI"
-      </code></pre>
-      <p>Update <code>image_tag</code> in <code>ansible/playbook-web.yaml</code> to <code>v2</code>, then run:</p>
-      <pre><code>
-      cd ~/ansible/ansible
-      ansible-playbook -i inventory.ini --limit web playbook-web.yaml
-      </code></pre>
-      <h4>Roll back</h4>
-      <p>To roll back to a working release, change <code>image_tag</code> in <code>ansible/playbook-web.yaml</code> to a prior valid ECR tag and rerun the same web deployment playbook.</p>
-    </article>
+curl -I http://127.0.0.1:8080/
+</code></pre>
+<p>Stop the temporary test container after validation:</p>
+<pre><code class="language-bash">sudo docker rm -f shipit-test
+</code></pre>
+<h2>Amazon ECR</h2>
+<p>The container image is stored in private Amazon ECR.</p>
+<pre><code class="language-text">Registry: 462525375635.dkr.ecr.ap-southeast-1.amazonaws.com
+Repository: devops-bootcamp/final-project-dani21894
+Tag: v1
+Full image URI:
+462525375635.dkr.ecr.ap-southeast-1.amazonaws.com/devops-bootcamp/final-project-dani21894:v1
+</code></pre>
+<p>Set image variables on the controller:</p>
+<pre><code class="language-bash">export AWS_REGION=ap-southeast-1
+export ECR_REGISTRY=462525375635.dkr.ecr.ap-southeast-1.amazonaws.com
+export IMAGE_REPO=devops-bootcamp/final-project-dani21894
+export IMAGE_TAG=v1
+export IMAGE_URI=${ECR_REGISTRY}/${IMAGE_REPO}:${IMAGE_TAG}
+</code></pre>
+<p>Authenticate Docker, tag the image, and push it:</p>
+<pre><code class="language-bash">aws ecr get-login-password --region &quot;$AWS_REGION&quot; \
+  | sudo docker login \
+      --username AWS \
+      --password-stdin &quot;$ECR_REGISTRY&quot;
 
-    <article class="card">
-      <h3>Security Notes</h3>
-      <p>The following files must never be committed to GitHub:</p>
-      <ul>
-      <li>AWS credentials and access keys.</li>
-      <li>GitHub personal access tokens.</li>
-      <li>SSH private keys, <code>.pem</code>, and <code>.key</code> files.</li>
-      <li><code>.env</code> files containing secrets.</li>
-      <li>Terraform state files and plans.</li>
-      <li>Ansible vault passwords or secret variable files.</li>
-      </ul>
-      <p>The root <code>.gitignore</code> excludes common sensitive and generated files, including <code>node_modules/</code>, <code>dist/</code>, <code>.terraform/</code>, <code>*.tfstate</code>, <code>*.tfvars</code>, <code>.env*</code>, keys, and credentials.</p>
-    </article>
+sudo docker tag shipit-launchpad:v1 &quot;$IMAGE_URI&quot;
+sudo docker push &quot;$IMAGE_URI&quot;
+</code></pre>
+<p>Verify the pushed ECR image:</p>
+<pre><code class="language-bash">aws ecr describe-images \
+  --region &quot;$AWS_REGION&quot; \
+  --repository-name &quot;$IMAGE_REPO&quot; \
+  --query &#39;imageDetails[].{Tags:imageTags,PushedAt:imagePushedAt,Digest:imageDigest}&#39; \
+  --output table
+</code></pre>
+<h3>IAM permissions</h3>
+<p>The controller instance role needs ECR push permissions, including:</p>
+<pre><code class="language-text">ecr:GetAuthorizationToken
+ecr:BatchCheckLayerAvailability
+ecr:InitiateLayerUpload
+ecr:UploadLayerPart
+ecr:CompleteLayerUpload
+ecr:PutImage
+</code></pre>
+<p>The web EC2 instance role needs permission to pull from ECR, such as <code>AmazonEC2ContainerRegistryReadOnly</code>.</p>
+<h2>Cloudflare DNS</h2>
+<p>The web application runs on the EC2 web server but is exposed using Cloudflare DNS.</p>
+<p>Create an A record in the <code>artisandevops.com</code> Cloudflare zone:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Type</td>
+<td><code>A</code></td>
+</tr>
+<tr>
+<td>Name</td>
+<td><code>web</code></td>
+</tr>
+<tr>
+<td>Content</td>
+<td>Public IPv4 address of the web EC2 instance</td>
+</tr>
+<tr>
+<td>Proxy status</td>
+<td><code>Proxied</code> (orange cloud)</td>
+</tr>
+<tr>
+<td>TTL</td>
+<td><code>Auto</code></td>
+</tr>
+</tbody></table>
+<p>Do not use the private IP <code>10.0.0.5</code> in Cloudflare. Cloudflare must point to the public IPv4 address of the web EC2 instance.</p>
+<p>Verify the published application:</p>
+<pre><code class="language-bash">curl -I http://web.artisandevops.com
+</code></pre>
+<h2>Monitoring</h2>
+<p>The monitoring server is <code>10.0.0.136</code>. Node Exporter targets only the web server through the <code>exporters</code> Ansible group.</p>
+<p>The monitoring access URL is <a href="https://monitoring.artisandevops.com/">https://monitoring.artisandevops.com/</a></p>
+<h2>CI/CD</h2>
+<p>Two GitHub Actions workflows live under <code>.github/workflows/</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>commit-pipeline.yml</code></td>
+<td>Synchronizes <code>README.md</code> and root <code>index.html</code> and auto-commits generated documentation changes</td>
+</tr>
+<tr>
+<td><code>static.yml</code></td>
+<td>Deploys the root static site to GitHub Pages</td>
+</tr>
+</tbody></table>
+<h3>Documentation sync</h3>
+<p>The documentation sync script keeps <code>README.md</code> and <code>index.html</code> aligned:</p>
+<ul>
+<li>When <code>README.md</code> changes, <code>index.html</code> is regenerated from it.</li>
+<li>Every <code>##</code> heading in the README becomes a documentation card in the synced section of the web page.</li>
+<li>When <code>index.html</code> changes inside the synced card area, <code>README.md</code> is regenerated from its cards.</li>
+<li>If both documents change, <code>README.md</code> takes precedence.</li>
+<li>The generated content is restricted to the range between <code>&lt;!-- SYNC:START --&gt;</code> and <code>&lt;!-- SYNC:END --&gt;</code>.</li>
+<li>Styling, hero content, and footer content outside that range remain unchanged.</li>
+</ul>
+<p>Run the sync locally from the repository root:</p>
+<pre><code class="language-bash">npm install
+npm run sync:docs
+npm run sync:docs -- --write
+</code></pre>
+<p>The first command is a dry run. The final command writes the generated result to disk.</p>
+<h3>GitHub Pages</h3>
+<p>GitHub Pages is configured with:</p>
+<pre><code class="language-text">Repository Settings -&gt; Pages -&gt; Build and deployment -&gt; Source: GitHub Actions
+</code></pre>
+<p>The Pages workflow uploads the repository root, including the generated <code>index.html</code>, and publishes it at:</p>
+<pre><code class="language-text">https://dani21894.github.io/devops-bootcamp-project/
+</code></pre>
+<h3>CI/CD validation</h3>
+<p>To test the complete documentation pipeline:</p>
+<pre><code class="language-bash">nano README.md
+npm run sync:docs -- --write
 
-    <article class="card">
-      <h3>Project Status</h3>
-      <pre><code>
-      [✓] Application built with Vite
-      [✓] Multi-stage Docker image built with Node.js and Nginx
-      [✓] Image pushed to private Amazon ECR
-      [✓] Ansible pulls the ECR image on the web server
-      [✓] Docker container serves the application on port 80
-      [✓] HTTP verification returned 200 OK
-      [✓] Cloudflare record exposes web.artisandevops.com
-      [✓] Documentation sync workflow is active
-      [✓] GitHub Pages deployment workflow is active
-      </code></pre>
-    </article>
-    <!-- SYNC:END -->
+git add README.md index.html
+git commit -m &quot;docs: update deployment documentation&quot;
+git push origin main
+</code></pre>
+<p>After the push:</p>
+<ol>
+<li><code>Docs Sync</code> runs and synchronizes the documentation files.</li>
+<li>If needed, <code>github-actions[bot]</code> creates a commit containing generated changes.</li>
+<li><code>Deploy static site to GitHub Pages</code> publishes the updated <code>index.html</code>.</li>
+<li>The GitHub Pages documentation site reflects the latest README content.</li>
+</ol>
+<h2>Operational Commands</h2>
+<h3>Check web deployment</h3>
+<pre><code class="language-bash">curl -I http://10.0.0.5/
+curl -I http://web.artisandevops.com
+</code></pre>
+<h3>Check running web container</h3>
+<pre><code class="language-bash">ansible web \
+  -i ansible/inventory.ini \
+  -b \
+  -m ansible.builtin.command \
+  -a &quot;docker ps&quot;
+</code></pre>
+<h3>View web container logs</h3>
+<pre><code class="language-bash">ansible web \
+  -i ansible/inventory.ini \
+  -b \
+  -m ansible.builtin.command \
+  -a &quot;docker logs web&quot;
+</code></pre>
+<h3>Release a new application version</h3>
+<p>Use a new image tag for each release rather than overwriting a previous deployment tag.</p>
+<pre><code class="language-bash">cd ~/app/ship
+sudo docker build -t shipit-launchpad:v2 .
+
+export IMAGE_TAG=v2
+export IMAGE_URI=${ECR_REGISTRY}/${IMAGE_REPO}:${IMAGE_TAG}
+
+sudo docker tag shipit-launchpad:v2 &quot;$IMAGE_URI&quot;
+sudo docker push &quot;$IMAGE_URI&quot;
+</code></pre>
+<p>Update <code>image_tag</code> in <code>ansible/playbook-web.yaml</code> to <code>v2</code>, then run:</p>
+<pre><code class="language-bash">cd ~/ansible/ansible
+ansible-playbook -i inventory.ini --limit web playbook-web.yaml
+</code></pre>
+<h3>Roll back</h3>
+<p>To roll back to a working release, change <code>image_tag</code> in <code>ansible/playbook-web.yaml</code> to a prior valid ECR tag and rerun the same web deployment playbook.</p>
+<h2>Security Notes</h2>
+<p>The following files must never be committed to GitHub:</p>
+<ul>
+<li>AWS credentials and access keys.</li>
+<li>GitHub personal access tokens.</li>
+<li>SSH private keys, <code>.pem</code>, and <code>.key</code> files.</li>
+<li><code>.env</code> files containing secrets.</li>
+<li>Terraform state files and plans.</li>
+<li>Ansible vault passwords or secret variable files.</li>
+</ul>
+<p>The root <code>.gitignore</code> excludes common sensitive and generated files, including <code>node_modules/</code>, <code>dist/</code>, <code>.terraform/</code>, <code>*.tfstate</code>, <code>*.tfvars</code>, <code>.env*</code>, keys, and credentials.</p>
+<h2>Project Status</h2>
+<pre><code class="language-text">[✓] Application built with Vite
+[✓] Multi-stage Docker image built with Node.js and Nginx
+[✓] Image pushed to private Amazon ECR
+[✓] Ansible pulls the ECR image on the web server
+[✓] Docker container serves the application on port 80
+[✓] HTTP verification returned 200 OK
+[✓] Cloudflare record exposes web.artisandevops.com
+[✓] Documentation sync workflow is active
+[✓] GitHub Pages deployment workflow is active
+</code></pre>
+
+      <!-- SYNC:END -->
+    </section>
   </main>
 
   <footer>
-    <p>Auto-generated by the documentation sync pipeline.</p>
+    Generated from <code>README.md</code> by the documentation sync pipeline.
   </footer>
 </body>
 </html>
-
-<!-- DEPLOYMENT TEST: 2026-09-03-1116 -->
