@@ -77,15 +77,21 @@
       ├── ansible/    # Inventory and deployment playbooks
       ├── terraform/  # AWS infrastructure as code
       └── README.md
+      
       </code></pre>
     </article>
 
     <article class="card">
       <h3>Deployment Flow</h3>
       <p>1. Build the Docker image from <code>app/</code>.</p>
-      <p>2. Push the image to Amazon ECR.</p>
-      <p>3. Deploy it with the Ansible playbook in <code>ansible/</code>.</p>
-      <p>4. The web server pulls the image from ECR and serves it on port 80.</p>
+      <p>      2. Push the image to Amazon ECR.</p>
+      <p>      3. Deploy it with the Ansible playbook in <code>ansible/</code>.</p>
+      <p>      4. The web server pulls the image from ECR and serves it on port 80.</p>
+    </article>
+
+    <article class="card">
+      <h3>CI/CD Demonstration</h3>
+      <p>This section was added to test automatic documentation synchronization.</p>
     </article>
     <!-- SYNC:END -->
   </main>
