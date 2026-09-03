@@ -22,3 +22,7 @@ A Vite application containerized with Docker, published to Amazon ECR, and deplo
       3. Deploy it with the Ansible playbook in `ansible/`.
 
       4. The web server pulls the image from ECR and serves it on port 80.
+
+## CI/CD Demonstration
+
+This section was added to test automatic documentation synchronization.
