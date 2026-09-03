@@ -8,7 +8,7 @@ End-to-end DevOps bootcamp project that provisions AWS infrastructure with Terra
 | Service | URL |
 |---|---|
 | Application | https://web.artisandevops.com |
-| Documentation site | [GitHub Pages](https://dani21894.github.io/devops-bootcamp-project/) |
+| Documentation site | https://projectdocs.artisandevops.com |
 | Source repository | [dani21894/devops-bootcamp-project](https://github.com/dani21894/devops-bootcamp-project/) |
 | Monitoring | https://monitoring.artisandevops.com |
 
